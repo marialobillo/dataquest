@@ -16,7 +16,21 @@ def read_csv(file_name):
 
     return final_list
 
-#US_births_1994-2003_CDC_NCHS.csv
 cdc_list = read_csv("births.csv")
 for item in range(0,10):
     print(cdc_list[item])
+
+def dow_births(list_of_list):
+    births_per_day = {}
+    for row in list_of_list:
+        day = row[3]
+        births = row[4]
+        if day in births_per_day:
+            births_per_day[day] += births
+        else:
+            births_per_day[day] = births
+    return births_per_day
+
+#US_births_1994-2003_CDC_NCHS.csv
+cdc_day_births = dow_births(cdc_list)
+print(cdc_day_births)
