@@ -34,3 +34,27 @@ def dow_births(list_of_list):
 #US_births_1994-2003_CDC_NCHS.csv
 cdc_day_births = dow_births(cdc_list)
 print(cdc_day_births)
+
+
+def calc_counts(data, column):
+    births_per_day = {}
+    for row in data:
+        day = row[column]
+        births = row[4]
+        if day in births_per_day:
+            births_per_day[day] += births
+        else:
+            births_per_day[day] = births
+    return births_per_day
+
+cdc_year_births = calc_counts(cdc_list, 0)
+cdc_month_births = calc_counts(cdc_list, 1)
+cdc_dom_births = calc_counts(cdc_list, 2)
+cdc_dow_births = calc_counts(cdc_list, 3)
+
+
+def get_max(data):
+    max(data.iteritems(), key=operator.itemgetter(1))[0]
+
+def get_min(data):
+    min(data.iteritems(), key=operator.itemgetter(1))[0]
